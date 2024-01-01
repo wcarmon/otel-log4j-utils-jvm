@@ -2,16 +2,15 @@ package io.github.wcarmon.otel.log4j;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import io.opentelemetry.api.common.AttributeKey;
 import io.opentelemetry.api.common.Attributes;
 import io.opentelemetry.sdk.trace.data.EventData;
 import io.opentelemetry.sdk.trace.data.SpanData;
 import io.opentelemetry.sdk.trace.data.StatusData;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
@@ -124,7 +123,7 @@ public final class OtelToLog4j2 {
      * handles null, blank, trims, normalizes case
      *
      * @param level "TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL" (any case, whitespace
-     *              ignored)
+     *     ignored)
      * @return null only when cannot parse Log4j2 level
      */
     @Nullable
@@ -144,8 +143,7 @@ public final class OtelToLog4j2 {
         private @Nullable Level defaultLevel;
         private String loggerName;
 
-        Builder() {
-        }
+        Builder() {}
 
         public OtelToLog4j2 build() {
             return new OtelToLog4j2(this.loggerName, this.defaultLevel);
