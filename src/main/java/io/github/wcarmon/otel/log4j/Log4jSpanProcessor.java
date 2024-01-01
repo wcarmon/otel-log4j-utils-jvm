@@ -11,13 +11,13 @@ import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.LoggerContext;
 
 /** Forwards all Span events to a Log4j2 appender. */
-public final class Log4j2SpanProcessor implements SpanProcessor {
+public final class Log4jSpanProcessor implements SpanProcessor {
 
     private final Appender appender;
 
-    private final OtelToLog4j2 converter;
+    private final OtelToLog4j converter;
 
-    private Log4j2SpanProcessor(OtelToLog4j2 converter, String targetAppenderName) {
+    private Log4jSpanProcessor(OtelToLog4j converter, String targetAppenderName) {
 
         requireNonNull(converter, "converter is required and null.");
         if (targetAppenderName == null || targetAppenderName.isBlank()) {
@@ -68,16 +68,16 @@ public final class Log4j2SpanProcessor implements SpanProcessor {
 
     public static class Builder {
 
-        private OtelToLog4j2 converter;
+        private OtelToLog4j converter;
         private String targetAppenderName;
 
         Builder() {}
 
-        public Log4j2SpanProcessor build() {
-            return new Log4j2SpanProcessor(this.converter, this.targetAppenderName);
+        public Log4jSpanProcessor build() {
+            return new Log4jSpanProcessor(this.converter, this.targetAppenderName);
         }
 
-        public Builder converter(OtelToLog4j2 converter) {
+        public Builder converter(OtelToLog4j converter) {
             this.converter = converter;
             return this;
         }
@@ -88,7 +88,7 @@ public final class Log4j2SpanProcessor implements SpanProcessor {
         }
 
         public String toString() {
-            return "Log4j2SpanProcessor.Builder(converter="
+            return "Log4jSpanProcessor.Builder(converter="
                     + this.converter
                     + ", targetAppenderName="
                     + this.targetAppenderName

@@ -18,13 +18,13 @@ import org.apache.logging.log4j.message.StringMapMessage;
 import org.jetbrains.annotations.Nullable;
 
 /** Converts SpanData to Log4j2 LogEvent. */
-public final class OtelToLog4j2 {
+public final class OtelToLog4j {
 
     private final Level defaultLevel;
 
     private final String loggerName;
 
-    private OtelToLog4j2(String loggerName, @Nullable Level defaultLevel) {
+    private OtelToLog4j(String loggerName, @Nullable Level defaultLevel) {
 
         if (loggerName == null || loggerName.isBlank()) {
             throw new IllegalArgumentException("loggerName is required");
@@ -61,7 +61,7 @@ public final class OtelToLog4j2 {
         return Log4jLogEvent.newBuilder()
                 .setIncludeLocation(false)
                 .setLevel(level)
-                .setLoggerFqcn(OtelToLog4j2.class.getName())
+                .setLoggerFqcn(OtelToLog4j.class.getName())
                 .setLoggerName(loggerName)
                 .setMessage(message)
                 .setNanoTime(spanEvent.getEpochNanos())
@@ -145,8 +145,8 @@ public final class OtelToLog4j2 {
 
         Builder() {}
 
-        public OtelToLog4j2 build() {
-            return new OtelToLog4j2(this.loggerName, this.defaultLevel);
+        public OtelToLog4j build() {
+            return new OtelToLog4j(this.loggerName, this.defaultLevel);
         }
 
         public Builder defaultLevel(@Nullable Level defaultLevel) {
@@ -160,7 +160,7 @@ public final class OtelToLog4j2 {
         }
 
         public String toString() {
-            return "OtelToLog4j2.OtelToLog4j2Builder(loggerName="
+            return "OtelToLog4j.Builder(loggerName="
                     + this.loggerName
                     + ", defaultLevel="
                     + this.defaultLevel
