@@ -49,6 +49,22 @@ java {
     withSourcesJar()
 }
 
+tasks.withType<Test>().configureEach {
+
+    jvmArgs("--enable-preview")
+
+    failFast = true // marks others after failure as ignored
+    useJUnitPlatform {
+        excludeTags.add("e2e")
+    }
+
+    testLogging {
+        events("passed", "skipped", "failed", "standardOut", "standardError")
+        showExceptions = true
+        showStandardStreams = true
+    }
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
